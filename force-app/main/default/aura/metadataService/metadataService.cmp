@@ -1,4 +1,4 @@
-<aura:component>
+<aura:component controller="MetadataServiceController">
     <aura:attribute type="String" name="sessionId" />
     <aura:attribute type="String" name="showVFPage" default="True" />
     <aura:attribute type="String" name="callerURL" />
