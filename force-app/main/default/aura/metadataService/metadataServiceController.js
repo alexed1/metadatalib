@@ -26,4 +26,40 @@
         };
         window.addEventListener("message", listenerFunction, true);
     },
+
+    getMetadataItemsAsync: function (cmp, event, helper) {
+        var args = event.getParam('arguments');
+        var loadSessionPromise = helper.ensureSessionIdIsRetrievedAsync(cmp);
+        var result = new Promise(function (resolve, reject) {
+            loadSessionPromise.then(function (sessionId) {
+                var callback = $A.getCallback(function () {
+                    var action = cmp.get('c.getMetadataItems');
+                    action.setParams({
+                        sessionId: sessionId,
+                        type: args.type
+                    });
+                    action.setCallback(this, function (response) {
+                        var callback = $A.getCallback(function () {
+                            var state = response.getState();
+                            if (state === 'SUCCESS') {
+                                var result = response.getReturnValue();
+                                if (result.success) {
+                                    resolve(result.results);
+                                } else {
+                                    reject(result.error);
+                                }
+                            } else {
+                                reject(response.getError());
+                            }
+                        });
+                        callback();
+
+                    });
+                    $A.enqueueAction(action);
+                });
+                callback();
+            });
+        });
+        return result;
+    }
 })

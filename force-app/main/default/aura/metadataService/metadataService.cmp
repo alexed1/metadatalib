@@ -5,6 +5,10 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
+    <aura:method name="getMetadataItemsAsync" action="{!c.getMetadataItemsAsync}">
+        <aura:attribute name="type" type="String" />
+    </aura:method>
+
     <aura:renderIf isTrue="{!v.showVFPage}">
         <!-- https://developer.salesforce.com/blogs/developer-relations/2017/01/lightning-visualforce-communication.html -->
         <iframe id="vfFrame" style="width:0;height:0;border:0; border:none;" aura:id="vfFrame" src="{!v.callerURL}" />
