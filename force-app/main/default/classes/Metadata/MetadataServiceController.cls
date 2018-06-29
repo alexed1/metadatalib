@@ -139,21 +139,22 @@ public with sharing class MetadataServiceController {
 		Set<String> fileNames = archive.getFileNames();
 		for (String fileName : fileNames)
 		{
-			System.debug('Found file name in archive: ' + fileName);
+			if (fileName.endsWith('meta.xml') || fileName == 'package.xml') {
+				continue;
+			}
 			Blob file = archive.getFile(fileName);
-			String contents = file.toString();
-			return contents;
+			return file.toString();
 		}
 		return null;
 	}
 
 	private static String generatePackageXml(String type, String name){
 		return
-				'<?contents version="1.0" encoding="UTF-8"?>'+
+				'<?xml version="1.0" encoding="UTF-8"?>'+
 				'<Package xmlns="http://soap.sforce.com/2006/04/metadata">'+
 				'    <types>'+
-				'        <members>' + name.escapeXml() + '</members>' +
 				'        <name>' + type.escapeXml() + '</name>' +
+				'        <members>' + name.escapeXml() + '</members>' +
 				'    </types>'+
 				'    <version>'+ API_VERSION + '.0</version>'+
 				'</Package>';

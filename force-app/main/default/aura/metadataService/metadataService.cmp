@@ -5,8 +5,12 @@
 
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
-    <aura:method name="getMetadataItemsAsync" action="{!c.getMetadataItemsAsync}">
+    <aura:method name="getMetadataItemListAsync" action="{!c.getMetadataItemListAsync}">
         <aura:attribute name="type" type="String" />
+    </aura:method>
+    <aura:method name="getMetadataItemAsync" action="{!c.getMetadataItemAsync}">
+        <aura:attribute name="type" type="String" />
+        <aura:attribute name="name" type="String" />
     </aura:method>
 
     <aura:renderIf isTrue="{!v.showVFPage}">

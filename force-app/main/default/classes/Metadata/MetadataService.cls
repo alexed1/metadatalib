@@ -639,7 +639,6 @@ public class MetadataService {
             MetadataService.retrieveResponse_element response_x;
             Map<String, MetadataService.retrieveResponse_element> response_map_x = new Map<String, MetadataService.retrieveResponse_element>();
             response_map_x.put('response_x', response_x);
-            system.debug(JSON.serialize(request_x));
             WebServiceCallout.invoke(
               this,
               request_x,

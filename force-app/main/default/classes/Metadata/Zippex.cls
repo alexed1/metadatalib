@@ -26,6 +26,7 @@ public class Zippex
         for (Integer fileLoop = 0; fileLoop < numberOfFiles; fileLoop++)
         {
             FileObject tempFile = new FileObject(zipfileString, offset);
+            System.debug('File ' + tempFile.fileName);
             zipFileMap.put(EncodingUtil.convertFromHex(tempFile.fileName).toString(), tempFile);
             offset = tempFile.c_offsetToNextRecord;
         }
@@ -34,6 +35,7 @@ public class Zippex
     //  Returns a set of filenames from the current Zip archive.
     public Set<String> getFileNames()
     {
+        System.debug('Archive contains ' + zipFileMap.size() + ' files');
         return zipFileMap.keySet().clone();
     }
 
@@ -92,6 +94,7 @@ public class Zippex
     // Extracts the specified file contents from the current Zip archive.  If the file does not exist, returns null.
     public Blob getFile(String fileName)
     {
+        System.debug('Lookin for file ' + fileName + ' in the archive');
         if (!zipFileMap.containsKey(fileName)) {return null;}
 
         FileObject tempFileObject = zipFileMap.get(fileName);
