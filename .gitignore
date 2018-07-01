@@ -1,0 +1,3 @@
+/.sfdx/*
+/.vscode/settings.json
+/mdapi_output_dir/*
